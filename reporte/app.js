@@ -47,20 +47,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await new Promise(r => setTimeout(r, 1200));
                 data = getDummyData();
             } else {
-                // Mode 2: Authenticated — API call using user.id
-                const API_URL = `http://api.latenly.com/report?token=${encodeURIComponent(user.id)}`;
-                console.log("Fetching report for user:", user.id);
+                // Mode 2: Authenticated — Query Supabase directly
+                const supabase = LatenlyAuth.client;
+                const { data: reportRows, error } = await supabase
+                    .from('reports')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .order('created_at', { ascending: false })
+                    .limit(1);
 
-                const response = await fetch(API_URL);
-                if (!response.ok) throw new Error(`API error: ${response.status}`);
-                data = await response.json();
-
-                // Manejo de respuesta
-                if (Array.isArray(data) && data.length > 0) {
-                    data = data[0].report_data || data[0];
-                } else if (data.report_data) {
-                    data = data.report_data;
+                if (error) {
+                    console.error("Supabase error:", error.message);
+                    throw new Error('Error al cargar datos desde la base de datos.');
                 }
+
+                if (!reportRows || reportRows.length === 0) {
+                    throw new Error('Aún no tienes reportes generados.');
+                }
+
+                // Extraer los datos (asumiendo columna report_data o la fila completa)
+                const row = reportRows[0];
+                data = row.report_data || row;
             }
 
             renderReport(data);
