@@ -723,6 +723,89 @@
     opacity: 0.8;
 }
 
+/* ── Pre-sale / Founder Pricing ────────────────────────────── */
+.presale-banner {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(236, 72, 153, 0.08));
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.presale-badge {
+    display: inline-block;
+    background: var(--brand-gradient);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 6px 20px;
+    border-radius: var(--radius-full);
+    margin-bottom: 0.75rem;
+}
+
+.presale-banner p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.presale-banner strong {
+    color: var(--text-primary);
+}
+
+.presale-countdown {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+.pricing-price-original {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-display);
+}
+
+.pricing-price-original span {
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.founder-price {
+    color: var(--color-success) !important;
+}
+
+.founder-save {
+    display: inline-block;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--color-success);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.5px;
+}
+
+.presale-cta-tag {
+    display: inline-block;
+    background: var(--brand-gradient);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 6px 20px;
+    border-radius: var(--radius-full);
+    margin-bottom: 1rem;
+}
+
 .pricing-footnote {
     text-align: center;
     font-size: 0.85rem;

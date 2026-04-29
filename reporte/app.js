@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             logoutBtn.style.display = 'inline-flex';
             logoutBtn.addEventListener('click', () => LatenlyAuth.signOut());
         }
+    } else {
+        // Show buy button in test mode
+        const buyTestBtn = document.getElementById('buyTestBtn');
+        if (buyTestBtn) {
+            buyTestBtn.style.display = 'inline-flex';
+        }
     }
 
     const views = {
