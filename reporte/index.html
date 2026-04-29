@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Oportunidades — Latenly</title>
+    <meta name="description" content="Tu reporte personalizado de oportunidades de venta en WhatsApp. Descubre pacientes listos para agendar.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-ambient"></div>
+    <div class="grain-overlay"></div>
+
+    <!-- Nav -->
+    <nav class="nav-bar">
+        <a href="/" class="nav-logo">Latenly<span>.</span></a>
+        <div class="nav-actions">
+            <a href="/conectar/" class="nav-link">Conectar</a>
+            <button class="btn-ghost" id="logoutBtn" style="display:none;">Cerrar Sesión</button>
+        </div>
+    </nav>
+
+    <div class="report-wrapper">
+
+        <!-- Loading State -->
+        <div id="loadingView" class="view-state active">
+            <div class="spinner"></div>
+            <h2 class="gradient-text" style="text-align:center; margin-top:1.5rem;">Analizando conversaciones...</h2>
+            <p class="text-secondary" style="text-align:center; margin-top:0.5rem;">Buscando el dinero que se te está escapando</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorView" class="view-state hidden">
+            <div style="text-align:center; padding:4rem 2rem;">
+                <h2 style="color: var(--color-danger); margin-bottom:1rem;">Reporte no encontrado</h2>
+                <p class="text-secondary">No pudimos cargar tu reporte. Si el problema persiste, contacta soporte.</p>
+                <button class="btn-glow" onclick="window.location.replace('/')" style="margin-top: 2rem;">Volver al Inicio</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="reportContent" class="view-state hidden">
+
+            <!-- 1. PORTADA -->
+            <header class="section-portada">
+                <div class="branding">
+                    <span class="brand-icon">⚡</span> Latenly.com
+                </div>
+                <div class="header-main slide-up-anim">
+                    <div class="badge badge-violet" style="margin-bottom: 1rem;">REPORTE DE INTELIGENCIA</div>
+                    <h1 id="clinicName">Análisis de Oportunidades — [Nombre de la Clínica]</h1>
+                    <p class="subtitle">Estrategia de conversión y reactivación de pacientes en WhatsApp</p>
+                    <div class="meta-data">
+                        <span id="reportDate">00 de Mes, 0000</span>
+                        <span class="dot">•</span>
+                        <span id="doctorName">Dr. [Nombre]</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- AUDITORÍA — Sección independiente -->
+            <section class="section-block section-audit slide-up-anim">
+                <div class="audit-panel glass-panel-static">
+                    <div class="audit-header">
+                        <span class="audit-icon">🔍</span>
+                        <div>
+                            <h4>Auditoría de tu WhatsApp</h4>
+                            <p>Analizamos <strong id="auditTotal">0</strong> conversaciones. Así las clasificamos:</p>
+                        </div>
+                    </div>
+                    <div class="audit-grid">
+                        <div class="audit-item">
+                            <span class="audit-val" id="auditGroups">0</span>
+                            <span class="audit-lbl">Grupos (ignorados)</span>
+                        </div>
+                        <div class="audit-item">
+                            <span class="audit-val" id="auditForeign">0</span>
+                            <span class="audit-lbl">Números extranjeros</span>
+                        </div>
+                        <div class="audit-item">
+                            <span class="audit-val" id="auditOld">0</span>
+                            <span class="audit-lbl">Más de 6 meses</span>
+                        </div>
+                        <div class="audit-item">
+                            <span class="audit-val" id="auditNoise">0</span>
+                            <span class="audit-lbl">Ruido / Spam</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. RESUMEN EJECUTIVO -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">🔥 Resumen Ejecutivo</h2>
+                <p class="section-desc">Esto es lo que encontramos <strong>acumulándose sin atender</strong> en tu
+                    bandeja de entrada:</p>
+
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel border-green">
+                        <div class="stat-icon icon-hot">🔥</div>
+                        <div class="stat-num" id="statHot">0</div>
+                        <div class="stat-label">pacientes que <strong>ya pidieron cita</strong><br>y nadie les respondió
+                        </div>
+                    </div>
+                    <div class="stat-card glass-panel border-yellow">
+                        <div class="stat-icon icon-warm">💬</div>
+                        <div class="stat-num" id="statWarm">0</div>
+                        <div class="stat-label">conversaciones que<br><strong>se enfriaron</strong> sin cerrar</div>
+                    </div>
+                    <div class="stat-card glass-panel border-blue">
+                        <div class="stat-icon icon-cold">❄️</div>
+                        <div class="stat-num" id="statCold">0</div>
+                        <div class="stat-label">contactos <strong>ignorados</strong><br>que son dinero dormido</div>
+                    </div>
+                </div>
+
+                <div class="opportunity-box glass-panel-static glow-border">
+                    <h3 class="opp-title">💸 Dinero que estás dejando en la mesa</h3>
+                    <div class="opp-details">
+                        <div class="opp-item">
+                            <span class="opp-val" id="oppCitas">0-0</span>
+                            <span class="opp-lbl">Citas que pudiste haber agendado</span>
+                        </div>
+                        <div class="opp-divider"></div>
+                        <div class="opp-item">
+                            <span class="opp-val gradient-text-green" id="oppValor">$0 MXN</span>
+                            <span class="opp-lbl">Dinero que se está perdiendo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERVICES BREAKDOWN -->
+                <div class="services-breakdown glass-panel-static" style="margin-top: 1.5rem;">
+                    <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--brand-pink);">
+                        ¿En qué servicios se está perdiendo dinero?</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Desglose por
+                        categoría de los contactos que te escribieron y no cerraron</p>
+                    <ul class="services-list">
+                        <li>
+                            <span class="svc-name">🦷 CORE (alto valor)</span>
+                            <span class="svc-desc">brackets, Invisalign, ortodoncia</span>
+                            <span class="svc-price">$10-30k MXN</span>
+                            <span class="svc-count" id="countCore">0 interesados</span>
+                        </li>
+                        <li>
+                            <span class="svc-name">✨ ESTÉTICOS (alto margen)</span>
+                            <span class="svc-desc">blanqueamiento, diseño sonrisa, carillas</span>
+                            <span class="svc-price">$3-15k MXN</span>
+                            <span class="svc-count" id="countEstetico">0 interesados</span>
+                        </li>
+                        <li>
+                            <span class="svc-name">🧹 PREVENTIVOS (bajo ticket)</span>
+                            <span class="svc-desc">limpieza, profilaxis</span>
+                            <span class="svc-price">$500-1.5k MXN</span>
+                            <span class="svc-count" id="countPreventivo">0 interesados</span>
+                        </li>
+                        <li>
+                            <span class="svc-name">🔧 POST-TRATAMIENTO</span>
+                            <span class="svc-desc">retenedores, ajustes</span>
+                            <span class="svc-price">$1-3k MXN</span>
+                            <span class="svc-count" id="countPost">0 interesados</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. HALLAZGOS CLAVE -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">🧠 Hallazgos Clave</h2>
+                <p class="section-desc">Esto es lo que está <strong>frenando tu crecimiento</strong> sin que te des
+                    cuenta:</p>
+                <ul class="insights-list" id="insightsList">
+                    <!-- injected -->
+                </ul>
+            </section>
+
+            <!-- 4. SEGMENTACIÓN DE CONTACTOS -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">🎯 Segmentación de Contactos</h2>
+                <p class="section-desc">Hemos clasificado tu audiencia para maximizar conversión:</p>
+                <div class="seg-grid">
+                    <div class="seg-card glass-panel seg-green">
+                        <div class="seg-header">🟢 Leads Calientes</div>
+                        <p>Ya preguntaron. Están muy cerca de agendar.</p>
+                        <div class="seg-action">👉 Acción inmediata</div>
+                    </div>
+                    <div class="seg-card glass-panel seg-yellow">
+                        <div class="seg-header">🟡 Leads Tibios</div>
+                        <p>Mostraron interés pero se enfrió la plática.</p>
+                        <div class="seg-action">👉 Necesitan seguimiento</div>
+                    </div>
+                    <div class="seg-card glass-panel seg-blue">
+                        <div class="seg-header">🔵 Leads Dormidos</div>
+                        <p>Conversaciones viejas o ignoradas.</p>
+                        <div class="seg-action">👉 Reactivación masiva</div>
+                    </div>
+                    <div class="seg-card glass-panel seg-purple">
+                        <div class="seg-header">🟣 Pacientes Actuales</div>
+                        <p>Oportunidad de limpiezas, blanqueamientos, etc.</p>
+                        <div class="seg-action">👉 Upsells</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. PLAN DE ACCION -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">⚡ Plan de Acción</h2>
+                <p class="section-desc">El sistema exacto para convertir estos leads en pacientes facturados.</p>
+                <div class="timeline">
+                    <div class="timeline-item glass-panel">
+                        <div class="tl-dot dot-hot"></div>
+                        <div class="tl-content">
+                            <h3>Fase 1: Quick wins (Días 1-3)</h3>
+                            <ul>
+                                <li>Contactar a todos los leads calientes.</li>
+                                <li>Enviar follow-ups estructurados.</li>
+                                <li>Reactivar contactos de los últimos 30 días.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item glass-panel">
+                        <div class="tl-dot dot-warm"></div>
+                        <div class="tl-content">
+                            <h3>Fase 2: Reactivación (Días 7-14)</h3>
+                            <ul>
+                                <li>Campaña a leads dormidos.</li>
+                                <li>Mensajes personalizados con oferta gancho.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item glass-panel">
+                        <div class="tl-dot dot-cold"></div>
+                        <div class="tl-content">
+                            <h3>Fase 3: Expansión (Continuo)</h3>
+                            <ul>
+                                <li>Sistema de referidos.</li>
+                                <li>Generación de reseñas en Google Maps.</li>
+                                <li>Upsells a pacientes actuales.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. MENSAJES LISTOS -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">💬 Mensajes Listos para Enviar</h2>
+                <p class="section-desc">Copia, pega y agenda. Sin sonar desesperado o robótico.</p>
+                <div class="messages-grid" id="messagesGrid">
+                    <!-- injected -->
+                </div>
+            </section>
+
+            <!-- 7. LISTA DE CONTACTOS PRIORITARIOS -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">📊 Lista de Contactos Prioritarios</h2>
+                <p class="section-desc">Estas personas <strong>ya te escribieron</strong>. Solo necesitas enviarles el
+                    mensaje correcto.</p>
+                <div class="table-responsive glass-panel-static">
+                    <table class="contacts-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Prioridad</th>
+                                <th>Acción Sugerida</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactsTableBody">
+                            <!-- injected -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- PUENTE: Conexión contactos → dinero -->
+                <div class="bridge-box glass-panel-static"
+                    style="margin-top: 1.5rem; border-left: 3px solid var(--color-success);">
+                    <p style="margin: 0; font-size: 0.95rem;">
+                        ☝️ <strong>Estos contactos = el dinero del resumen.</strong>
+                        Cada mensaje de la sección anterior fue creado por IA específicamente para cada uno de ellos.
+                        <strong>Búscalos en tu WhatsApp → copia el mensaje → envíalo.</strong>
+                        Si la mitad responde, estarás facturando
+                        <strong class="gradient-text-green" id="bridgeValor">$0 MXN</strong> adicionales <strong>esta
+                            semana</strong>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 8. PROYECCIÓN -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">📈 Proyección de Resultados</h2>
+                <p class="section-desc">Si actúas <strong>esta semana</strong>, esto es lo que puedes esperar. Si no,
+                    estos leads se irán con otro doctor.</p>
+                <div class="proj-grid">
+                    <div class="proj-card glass-panel">
+                        <div class="proj-val" id="projResp">0%</div>
+                        <div class="proj-lbl">Tasa de Respuesta</div>
+                    </div>
+                    <div class="proj-card glass-panel">
+                        <div class="proj-val" id="projCitas">0</div>
+                        <div class="proj-lbl">Nuevas Citas Posibles</div>
+                    </div>
+                    <div class="proj-card glass-panel highlight-card">
+                        <div class="proj-val gradient-text-green" id="projRoi">0x</div>
+                        <div class="proj-lbl">ROI vs costo del reporte ($200)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. SIGUIENTE PASO — REPORTE vs SISTEMA -->
+            <section class="section-block slide-up-anim">
+                <h2 class="section-title">🔁 ¿Qué sigue después de este reporte?</h2>
+
+                <!-- Explicación clara -->
+                <div class="next-steps-explainer glass-panel-static">
+                    <div class="step-row">
+                        <div class="step-icon-lg">📸</div>
+                        <div class="step-text">
+                            <h4>Lo que acabas de ver: Una fotografía</h4>
+                            <p>Este reporte es un diagnóstico de <strong>hoy</strong>. Te mostró dónde hay dinero en tu
+                                WhatsApp.
+                                Pero mañana llegarán nuevos mensajes, nuevos leads que preguntan por precio y se van si
+                                no les das seguimiento.</p>
+                        </div>
+                    </div>
+                    <div class="step-divider"></div>
+                    <div class="step-row">
+                        <div class="step-icon-lg">🤖</div>
+                        <div class="step-text">
+                            <h4>Lo que necesitas: Un asistente de IA monitoreando 24/7</h4>
+                            <p>Un sistema que <strong>cada 1-2 días</strong> lea tu WhatsApp, detecte quién preguntó,
+                                quién se está enfriando
+                                y te diga <strong>exactamente qué escribirle a cada persona</strong> — personalizado,
+                                sin sonar robótico.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Cards -->
+                <h3 style="text-align: center; margin: 2.5rem 0 1.5rem; font-size: 1.2rem; color: var(--text-primary);">
+                    Elige el nivel de inteligencia para tu clínica
+                </h3>
+                <div class="pricing-grid">
+                    <!-- Tier 1: Básico -->
+                    <div class="pricing-card glass-panel">
+                        <div class="pricing-medal">🥉</div>
+                        <h4 class="pricing-name">Básico</h4>
+                        <p class="pricing-tagline">"No perder pacientes"</p>
+                        <div class="pricing-price">$1,500<span>/mes</span></div>
+                        <ul class="pricing-features">
+                            <li>✅ Monitoreo continuo de WhatsApp</li>
+                            <li>✅ Detección de leads activos</li>
+                            <li>✅ Follow-ups sugeridos por IA</li>
+                            <li>✅ 1 campaña de reactivación / mes</li>
+                            <li>✅ Hasta 200 contactos activos</li>
+                        </ul>
+                        <p class="pricing-result">👉 Recuperar 2–5 conversaciones</p>
+                        <p class="pricing-value">Debe generar mín. <strong>$3,000</strong> en valor</p>
+                        <p class="pricing-goal">🎯 Recuperar dinero rápido</p>
+                    </div>
+                    <!-- Tier 2: Growth -->
+                    <div class="pricing-card glass-panel pricing-popular">
+                        <div class="pricing-badge">MÁS POPULAR</div>
+                        <div class="pricing-medal">🥈</div>
+                        <h4 class="pricing-name">Growth</h4>
+                        <p class="pricing-tagline">"Generar más citas"</p>
+                        <div class="pricing-price">$3,500<span>/mes</span></div>
+                        <ul class="pricing-features">
+                            <li>✅ Todo lo del plan Básico</li>
+                            <li>✅ 2–4 campañas por mes</li>
+                            <li>✅ Sistema de referidos</li>
+                            <li>✅ Sistema de reseñas Google</li>
+                            <li>✅ Priorización inteligente de leads</li>
+                            <li>✅ Hasta 600 contactos activos</li>
+                        </ul>
+                        <p class="pricing-result">👉 5–15 conversaciones activas + citas</p>
+                        <p class="pricing-value">Debe generar mín. <strong>$10,000</strong> en valor</p>
+                        <p class="pricing-goal">🎯 Crear flujo constante de citas</p>
+                    </div>
+                    <!-- Tier 3: Pro -->
+                    <div class="pricing-card glass-panel">
+                        <div class="pricing-medal">🥇</div>
+                        <h4 class="pricing-name">Pro</h4>
+                        <p class="pricing-tagline">"Maximizar ingresos"</p>
+                        <div class="pricing-price">$7,000<span>/mes</span></div>
+                        <ul class="pricing-features">
+                            <li>✅ Todo lo del plan Growth</li>
+                            <li>✅ Upsells y cross-sells automáticos</li>
+                            <li>✅ Insights mensuales personalizados</li>
+                            <li>✅ Optimización continua de mensajes</li>
+                            <li>✅ Soporte prioritario</li>
+                            <li>✅ 1,500+ contactos activos</li>
+                        </ul>
+                        <p class="pricing-result">👉 Pipeline constante + aumento de LTV</p>
+                        <p class="pricing-value">Debe generar mín. <strong>$20,000</strong> en valor</p>
+                        <p class="pricing-goal">🎯 Más dinero por cada paciente</p>
+                    </div>
+                </div>
+
+                <p class="pricing-footnote">
+                    💡 <strong>¿Por qué mensual?</strong> La IA monitorea tu WhatsApp cada 1-2 días. Detecta leads
+                    nuevos,
+                    conversaciones que se están enfriando y oportunidades de upsell. Cada mes llegan pacientes nuevos y
+                    otros se van —
+                    sin monitoreo automático, ese dinero se lo lleva tu competencia.
+                </p>
+            </section>
+
+            <!-- 10. CTA WHATSAPP + REFERIDOS -->
+            <section class="section-cta slide-up-anim">
+                <div class="cta-content glass-panel-static glow-border">
+                    <h2>¿Listo para dejar de perder dinero?</h2>
+                    <p>Escríbenos por WhatsApp y activa tu plan en menos de 5 minutos.
+                        <strong>¿Conoces otro doctor?</strong> Recomiéndanos y recibe un mes gratis cuando active su
+                        plan.
+                    </p>
+                    <div class="cta-buttons">
+                        <a class="btn-glow-green large"
+                            href="https://wa.me/5219614639921?text=Hola%2C%20vi%20mi%20reporte%20de%20oportunidades%20y%20quiero%20activar%20mi%20plan%20%F0%9F%9A%80"
+                            target="_blank">
+                            💬 Activar mi plan por WhatsApp
+                        </a>
+                        <button class="btn-outline large" onclick="shareReport()">
+                            📤 Compartir con un colega
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>

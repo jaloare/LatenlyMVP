@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada — Latenly</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-content {
+            max-width: 480px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .error-code {
+            font-family: var(--font-display);
+            font-size: clamp(6rem, 15vw, 10rem);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: var(--brand-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.8;
+        }
+
+        .error-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .error-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .error-footer {
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            color: var(--text-tertiary);
+        }
+
+        .error-footer a {
+            color: var(--brand-violet);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="bg-ambient"></div>
+    <div class="grain-overlay"></div>
+
+    <div class="error-page">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Página no encontrada</h1>
+            <p class="error-desc">
+                La página que buscas no existe o fue movida.
+                Si crees que esto es un error, contáctanos.
+            </p>
+            <div class="error-actions">
+                <a href="/" class="btn-glow">← Volver al inicio</a>
+                <a href="/login/" class="btn-outline">Iniciar Sesión</a>
+            </div>
+            <div class="error-footer">
+                <p>© 2026 <a href="/">Latenly.com</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
