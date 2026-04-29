@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conectar WhatsApp — Latenly</title>
+    <meta name="description" content="Vincula tu cuenta de WhatsApp con Latenly para comenzar el análisis de oportunidades.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="bg-ambient"></div>
+    <div class="grain-overlay"></div>
+
+    <!-- Nav -->
+    <nav class="nav-bar">
+        <a href="/" class="nav-logo">Latenly<span>.</span></a>
+        <div class="nav-actions">
+            <a href="/reporte/" class="nav-link">Mi Reporte</a>
+            <button class="btn-ghost" id="logoutBtn" style="display:none;">Cerrar Sesión</button>
+        </div>
+    </nav>
+
+    <div class="container-sm connect-wrapper">
+
+        <header class="connect-header slide-up-anim">
+            <div class="badge-violet badge" style="margin-bottom: 1rem;">PASO 2 DE 3</div>
+            <h1>Conectar <span class="gradient-text">WhatsApp</span></h1>
+            <p>Vincula tu cuenta para iniciar el análisis automático de tus conversaciones.</p>
+        </header>
+
+        <main class="glass-panel-static connect-card slide-up-anim">
+
+            <!-- Loading View -->
+            <div id="loadingView" class="view active">
+                <div class="view-center">
+                    <div class="spinner"></div>
+                    <p>Verificando estado de la conexión...</p>
+                </div>
+            </div>
+
+            <!-- Error/Not Found View -->
+            <div id="errorView" class="view">
+                <div class="view-center">
+                    <div class="status-icon status-error">✕</div>
+                    <h2>Conexión no válida</h2>
+                    <p>No pudimos encontrar tu conexión. Por favor, contacta soporte.</p>
+                    <a href="mailto:hola@latenly.com" class="btn-glow" style="margin-top: 1.5rem;">Contactar Soporte</a>
+                </div>
+            </div>
+
+            <!-- Success Connected View -->
+            <div id="successView" class="view">
+                <div class="view-center">
+                    <div class="status-icon status-success">✓</div>
+                    <h2>¡Tu WhatsApp está conectado!</h2>
+                    <p>Estamos analizando tus conversaciones para encontrar tus próximas citas. Recibirás un mensaje de WhatsApp con tu reporte en las próximas 48–72 horas.</p>
+                    <a href="/reporte/" class="btn-glow" style="margin-top: 1.5rem;">Ver Mi Reporte →</a>
+                </div>
+            </div>
+
+            <!-- Disconnected / Selector View -->
+            <div id="disconnectedView" class="view">
+
+                <div class="method-tabs">
+                    <button class="tab-btn active" data-tab="qr">Código QR</button>
+                    <button class="tab-btn" data-tab="code">Código de Texto</button>
+                </div>
+
+                <!-- Tab: QR -->
+                <div id="tab-qr" class="tab-content active">
+                    <div class="code-display">
+                        <div class="qr-placeholder" id="qrContainer">
+                            <button class="btn-glow" id="btnGenerateQR">Generar QR</button>
+                        </div>
+                        <p class="timer-text" style="display:none;" id="timerWrapperQR">Expira en <span id="timerQR">1:00</span></p>
+                    </div>
+
+                    <div class="instructions-box">
+                        <ul class="step-list">
+                            <li>Abre WhatsApp en tu teléfono.</li>
+                            <li>Toca <strong>Menú</strong> en Android o <strong>Configuración</strong> en iPhone.</li>
+                            <li>Toca <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un dispositivo</strong>.</li>
+                            <li>Apunta tu teléfono a esta pantalla para capturar el código QR.</li>
+                        </ul>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span>Tutorial paso a paso con fotos</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="step-list">
+                                <li>Abre WhatsApp en tu teléfono.</li>
+                                <li>Toca <strong>Menú</strong> en Android o <strong>Configuración</strong> en iPhone.
+                                    <div class="step-img-placeholder">[Imagen Menú/Configuración]</div>
+                                </li>
+                                <li>Toca <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un dispositivo</strong>.
+                                    <div class="step-img-placeholder">[Imagen Dispositivos Vinculados]</div>
+                                </li>
+                                <li>Apunta tu teléfono a esta pantalla para capturar el código QR.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Code -->
+                <div id="tab-code" class="tab-content">
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label class="input-label" for="phoneInput">Número de WhatsApp</label>
+                        <div class="phone-input-wrapper">
+                            <div class="phone-prefix">
+                                <span>🇲🇽</span> <span>+52</span>
+                            </div>
+                            <input type="tel" id="phoneInput" class="input-field phone-field" placeholder="10 dígitos" maxlength="10">
+                        </div>
+                        <p class="input-error" id="phoneError">Por favor, ingresa un número válido de 10 dígitos.</p>
+                    </div>
+
+                    <div class="code-display">
+                        <div class="text-code-box" id="textCodeContainer" style="display:none;">
+                            <span class="text-secondary">Cargando...</span>
+                        </div>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-direction: column;">
+                            <button class="btn-glow" id="btnGenerateCode">Generar Código</button>
+                            <button class="btn-outline" id="btnCopyCode" style="display: none;">Copiar Código</button>
+                        </div>
+                        <p class="timer-text" style="display:none;" id="timerWrapperCode">Expira en <span id="timerCode">3:00</span></p>
+                    </div>
+
+                    <div class="instructions-box">
+                        <ul class="step-list">
+                            <li>Abre WhatsApp en tu teléfono.</li>
+                            <li>Ve a <strong>Dispositivos vinculados</strong> > <strong>Vincular un dispositivo</strong>.</li>
+                            <li>Toca <strong>Vincular con el número de teléfono</strong> en la parte inferior de la pantalla.</li>
+                            <li>Introduce el código de 8 letras y números que aparece arriba.</li>
+                        </ul>
+                    </div>
+
+                    <div class="accordion">
+                        <button class="accordion-header">
+                            <span>Tutorial paso a paso con fotos</span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <ul class="step-list">
+                                <li>Abre WhatsApp en tu teléfono.</li>
+                                <li>Ve a <strong>Dispositivos vinculados</strong> > <strong>Vincular un dispositivo</strong>.</li>
+                                <li>Toca <strong>Vincular con el número de teléfono</strong> en la parte inferior de la pantalla.
+                                    <div class="step-img-placeholder">[Imagen Vincular con teléfono]</div>
+                                </li>
+                                <li>Introduce el código de 8 letras y números que aparece arriba.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/js/config.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>

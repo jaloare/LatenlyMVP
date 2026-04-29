@@ -1,0 +1,335 @@
+/* ═══════════════════════════════════════════════════════════════
+   Conectar WhatsApp — Dark Mode Premium
+   Inherits from global.css
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Layout ────────────────────────────────────────────────── */
+.connect-wrapper {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.connect-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.connect-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.connect-header p {
+    color: var(--text-secondary);
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.connect-card {
+    padding: 2rem;
+}
+
+/* ── View States ───────────────────────────────────────────── */
+.view {
+    display: none;
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+.view.active {
+    display: block;
+}
+
+.view-center {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.view-center p {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ── Status Icons ──────────────────────────────────────────── */
+.status-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+}
+
+.status-success {
+    background: var(--color-success-dim);
+    color: var(--color-success);
+    box-shadow: var(--shadow-glow-green);
+}
+
+.status-error {
+    background: var(--color-danger-dim);
+    color: var(--color-danger);
+}
+
+/* ── Method Tabs ───────────────────────────────────────────── */
+.method-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 2rem;
+}
+
+.tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    transition: all var(--transition-base);
+    font-family: var(--font-ui);
+}
+
+.tab-btn:hover {
+    color: var(--text-secondary);
+    background: var(--bg-hover);
+}
+
+.tab-btn.active {
+    color: var(--brand-violet);
+    border-bottom-color: var(--brand-violet);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ── QR & Code Display ─────────────────────────────────────── */
+.code-display {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.qr-placeholder {
+    width: 260px;
+    height: 260px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition-base);
+}
+
+.qr-placeholder:hover {
+    border-color: var(--border-default);
+}
+
+.qr-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+.text-code-box {
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+    font-weight: 600;
+    font-family: monospace;
+    color: var(--text-primary);
+    margin: 0 auto 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ── Phone Input ───────────────────────────────────────────── */
+.phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-input);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.phone-input-wrapper:focus-within {
+    border-color: var(--brand-violet);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.phone-prefix {
+    padding: 0.875rem 1rem;
+    background: var(--bg-elevated);
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.phone-field {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.phone-field:focus {
+    box-shadow: none !important;
+}
+
+/* ── Instructions ──────────────────────────────────────────── */
+.instructions-box {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background: rgba(139, 92, 246, 0.04);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.step-list {
+    list-style: none;
+    counter-reset: steps;
+    padding: 0;
+}
+
+.step-list li {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.step-list li:last-child {
+    margin-bottom: 0;
+}
+
+.step-list li strong {
+    color: var(--text-primary);
+}
+
+.step-list li::before {
+    counter-increment: steps;
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--brand-violet-dim);
+    color: var(--brand-violet);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.step-img-placeholder {
+    width: 100%;
+    height: 100px;
+    background: var(--bg-input);
+    border: 1px dashed var(--border-subtle);
+    border-radius: var(--radius-md);
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+}
+
+/* ── Accordion ─────────────────────────────────────────────── */
+.accordion {
+    margin-top: 1rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.25rem;
+    background: var(--bg-surface);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.accordion-header:hover {
+    color: var(--text-primary);
+    background: var(--bg-elevated);
+}
+
+.accordion-icon {
+    transition: transform 0.3s ease;
+    font-size: 0.7rem;
+}
+
+.accordion.expanded .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    display: none;
+    padding: 1.25rem;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.accordion.expanded .accordion-content {
+    display: block;
+}
+
+/* ── Timer ─────────────────────────────────────────────────── */
+.timer-text {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .connect-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .connect-card {
+        padding: 1.25rem;
+    }
+
+    .qr-placeholder {
+        width: 220px;
+        height: 220px;
+    }
+}
