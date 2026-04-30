@@ -22,6 +22,10 @@
     <nav class="nav-bar">
         <a href="/" class="nav-logo">Latenly<span>.</span></a>
         <div class="nav-actions">
+            <a id="vipSupportBtn" href="https://wa.me/5219614639921?text=Hola,%20necesito%20soporte%20VIP%20con%20Latenly%20%F0%9F%9B%A1%EF%B8%8F" target="_blank" class="nav-link" style="color: var(--brand-pink); display: flex; align-items: center; gap: 0.3rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Soporte VIP
+            </a>
             <a href="/#comprar" class="btn-glow-green" id="buyTestBtn" style="display:none; padding: 0.4rem 1rem; font-size: 0.9rem;">Quiero mi reporte</a>
             <a href="/conectar/" class="nav-link">Conectar</a>
             <button class="btn-ghost" id="logoutBtn" style="display:none;">Cerrar Sesión</button>
@@ -37,12 +41,21 @@
             <p class="text-secondary" style="text-align:center; margin-top:0.5rem;">Buscando el dinero que se te está escapando</p>
         </div>
 
-        <!-- Error State -->
+        <!-- Error/Empty State -->
         <div id="errorView" class="view-state hidden">
-            <div style="text-align:center; padding:4rem 2rem;">
-                <h2 style="color: var(--color-danger); margin-bottom:1rem;">Reporte no encontrado</h2>
-                <p class="text-secondary">No pudimos cargar tu reporte. Si el problema persiste, contacta soporte.</p>
-                <button class="btn-glow" onclick="window.location.replace('/')" style="margin-top: 2rem;">Volver al Inicio</button>
+            <div class="glass-panel" style="text-align:center; padding:4rem 2rem; max-width: 600px; margin: 4rem auto;">
+                <h2 style="color: var(--text-primary); margin-bottom:1rem;">Tu análisis está en proceso ⚙️</h2>
+                <p class="text-secondary" style="margin-bottom: 2rem; line-height: 1.6;">
+                    Toma entre 48 y 72 horas después de conectar tu WhatsApp. Nuestra IA está analizando tus conversaciones para encontrar y clasificar las oportunidades de venta.
+                </p>
+                <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <p style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">
+                        <strong>¿Aún no has conectado tu WhatsApp?</strong><br>
+                        Debes hacerlo para que podamos comenzar el análisis.
+                    </p>
+                    <a href="/conectar/" class="btn-glow-green" style="margin-top: 1.5rem; display: inline-block;">Conectar mi WhatsApp ahora</a>
+                </div>
+                <p id="errorDetails" style="color: var(--color-danger); font-size: 0.85rem; display: none;"></p>
             </div>
         </div>
 
@@ -344,105 +357,54 @@
                     </div>
                 </div>
 
-                <!-- Pre-sale Banner -->
-                <div class="presale-banner">
-                    <span class="presale-badge">🚀 PREVENTA — ACCESO FUNDADOR</span>
-                    <p>El sistema completo está en construcción. Entra ahora con precio de Fundador, <strong>congelado de por vida</strong>, y sé de los primeros en acceder cuando lancemos.</p>
-                    <div class="presale-countdown">
-                        <span>⏳ Solo <strong>20 lugares</strong> disponibles a este precio</span>
-                    </div>
-                </div>
-
-                <!-- Pricing Cards -->
-                <h3 style="text-align: center; margin: 2.5rem 0 1.5rem; font-size: 1.2rem; color: var(--text-primary);">
-                    Elige tu nivel — precio Fundador garantizado
+                <!-- 10. NEXT STEPS (Replaced Pre-sale) -->
+            <section class="section-next-steps slide-up-anim" style="margin-top: 4rem; margin-bottom: 2rem;">
+                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: var(--text-primary);">
+                    Tus Siguientes Pasos
                 </h3>
-                <div class="pricing-grid">
-                    <!-- Tier 1: Básico -->
-                    <div class="pricing-card glass-panel">
-                        <div class="pricing-medal">🥉</div>
-                        <h4 class="pricing-name">Básico</h4>
-                        <p class="pricing-tagline">"No perder pacientes"</p>
-                        <div class="pricing-price-original">$1,500<span>/mes</span></div>
-                        <div class="pricing-price founder-price">$900<span>/mes</span></div>
-                        <div class="founder-save">Ahorras $600/mes</div>
-                        <ul class="pricing-features">
-                            <li>✅ Monitoreo continuo de WhatsApp</li>
-                            <li>✅ Detección de leads activos</li>
-                            <li>✅ Follow-ups sugeridos por IA</li>
-                            <li>✅ 1 campaña de reactivación / mes</li>
-                            <li>✅ Hasta 200 contactos activos</li>
-                        </ul>
-                        <p class="pricing-result">👉 Recuperar 2–5 conversaciones</p>
-                        <p class="pricing-value">Debe generar mín. <strong>$3,000</strong> en valor</p>
-                        <p class="pricing-goal">🎯 Recuperar dinero rápido</p>
-                    </div>
-                    <!-- Tier 2: Growth (RECOMMENDED) -->
-                    <div class="pricing-card glass-panel pricing-popular">
-                        <div class="pricing-badge">⭐ RECOMENDADO FUNDADOR</div>
-                        <div class="pricing-medal">🥈</div>
-                        <h4 class="pricing-name">Growth</h4>
-                        <p class="pricing-tagline">"Generar más citas"</p>
-                        <div class="pricing-price-original">$3,500<span>/mes</span></div>
-                        <div class="pricing-price founder-price">$1,999<span>/mes</span></div>
-                        <div class="founder-save">Ahorras $1,501/mes</div>
-                        <ul class="pricing-features">
-                            <li>✅ Todo lo del plan Básico</li>
-                            <li>✅ 2–4 campañas por mes</li>
-                            <li>✅ Sistema de referidos</li>
-                            <li>✅ Sistema de reseñas Google</li>
-                            <li>✅ Priorización inteligente de leads</li>
-                            <li>✅ Hasta 600 contactos activos</li>
-                        </ul>
-                        <p class="pricing-result">👉 5–15 conversaciones activas + citas</p>
-                        <p class="pricing-value">Debe generar mín. <strong>$10,000</strong> en valor</p>
-                        <p class="pricing-goal">🎯 Crear flujo constante de citas</p>
-                    </div>
-                    <!-- Tier 3: Pro -->
-                    <div class="pricing-card glass-panel">
-                        <div class="pricing-medal">🥇</div>
-                        <h4 class="pricing-name">Pro</h4>
-                        <p class="pricing-tagline">"Maximizar ingresos"</p>
-                        <div class="pricing-price-original">$7,000<span>/mes</span></div>
-                        <div class="pricing-price founder-price">$3,500<span>/mes</span></div>
-                        <div class="founder-save">Ahorras $3,500/mes</div>
-                        <ul class="pricing-features">
-                            <li>✅ Todo lo del plan Growth</li>
-                            <li>✅ Upsells y cross-sells automáticos</li>
-                            <li>✅ Insights mensuales personalizados</li>
-                            <li>✅ Optimización continua de mensajes</li>
-                            <li>✅ Soporte prioritario</li>
-                            <li>✅ 1,500+ contactos activos</li>
-                        </ul>
-                        <p class="pricing-result">👉 Pipeline constante + aumento de LTV</p>
-                        <p class="pricing-value">Debe generar mín. <strong>$20,000</strong> en valor</p>
-                        <p class="pricing-goal">🎯 Más dinero por cada paciente</p>
-                    </div>
-                </div>
-
-                <p class="pricing-footnote">
-                    🔒 <strong>Precio congelado de por vida.</strong> Al entrar en preventa, tu precio nunca sube aunque el plan aumente. El sistema estará disponible en los próximos meses — los Fundadores tienen acceso prioritario al lanzamiento.
-                </p>
-            </section>
-
-            <!-- 10. CTA PREVENTA -->
-            <section class="section-cta slide-up-anim">
-                <div class="cta-content glass-panel-static glow-border">
-                    <div class="presale-cta-tag">🔒 Precio Fundador — Solo 20 lugares</div>
-                    <h2>Entra en preventa y congela tu precio</h2>
-                    <p>El sistema de monitoreo continuo está siendo construido. Al entrar hoy, aseguras el precio más bajo que tendrá Latenly — <strong>para siempre</strong>.
-                        ¿Conoces otro doctor? Recomiéndanos y ambos reciben un mes gratis al activar.
-                    </p>
-                    <div class="cta-buttons">
-                        <a class="btn-glow-green large"
-                            href="https://wa.me/5219614639921?text=Hola%2C%20vi%20mi%20reporte%20de%20oportunidades%20y%20quiero%20entrar%20en%20la%20preventa%20como%20Fundador%20%F0%9F%9A%80"
-                            target="_blank">
-                            🚀 Quiero ser Fundador
+                
+                <div style="display: grid; gap: 1.5rem; grid-template-columns: 1fr; max-width: 750px; margin: 0 auto;">
+                    
+                    <!-- Bloque 1: Kit de Conversión -->
+                    <div class="glass-panel glow-border" style="padding: 2rem; text-align: left;">
+                        <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+                            🛠️ Siguiente paso: actúa hoy
+                        </h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                            Ya sabes dónde está el dinero. Ahora necesitas saber qué escribirle a cada lead — sin sonar desesperado, sin improvisar.<br><br>
+                            El <strong>Kit de Conversión</strong> incluye los mensajes, secuencias y estrategias exactas para cerrar, reactivar y hacer upsell a tus pacientes. Hoy, sin esperar el sistema.
+                        </p>
+                        <a href="https://pay.hotmart.com/PLACEHOLDER" target="_blank" class="btn-glow-green" style="display: inline-block;">
+                            → Quiero el Kit de Conversión — $497 MXN
                         </a>
-                        <button class="btn-outline large" onclick="shareReport()">
-                            📤 Compartir con un colega
+                    </div>
+
+                    <!-- Bloque 2: Preventa -->
+                    <div class="glass-panel" style="padding: 2rem; text-align: left;">
+                        <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+                            🚀 ¿Prefieres que esto sea automático?
+                        </h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                            El sistema que hace esto solo — monitoreo continuo, detección de leads, mensajes personalizados cada 1-2 días — está en construcción. Solo 20 lugares con precio Fundador, congelado de por vida.
+                        </p>
+                        <a href="https://wa.me/5219614639921?text=Hola%2C%20quiero%20un%20lugar%20en%20la%20preventa%20del%20sistema%20Latenly%20%F0%9F%9A%80" target="_blank" class="btn-outline" style="display: inline-block;">
+                            → Quiero un lugar en la preventa
+                        </a>
+                    </div>
+
+                    <!-- Bloque 3: Compartir -->
+                    <div class="glass-panel" style="padding: 2rem; text-align: left;">
+                        <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+                            📤 ¿Conoces a otro doctor perdiendo pacientes así?
+                        </h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                            Comparte este reporte. Si entra en preventa, ambos reciben un mes gratis al activar.
+                        </p>
+                        <button onclick="shareReport()" class="btn-ghost" style="display: inline-block; border: 1px solid var(--border-subtle); padding: 0.6rem 1.2rem; border-radius: var(--radius-md);">
+                            → Compartir con un colega
                         </button>
                     </div>
+
                 </div>
             </section>
 

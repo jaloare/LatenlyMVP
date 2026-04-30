@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (buyTestBtn) {
             buyTestBtn.style.display = 'inline-flex';
         }
+        // Hide VIP Support in test mode
+        const vipSupportBtn = document.getElementById('vipSupportBtn');
+        if (vipSupportBtn) {
+            vipSupportBtn.style.display = 'none';
+        }
     }
 
     const views = {
@@ -91,6 +96,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error("Error fetching report data:", error);
             showView('error');
+            const errorDetails = document.getElementById('errorDetails');
+            if (errorDetails && error.message !== 'Aún no tienes reportes generados.') {
+                errorDetails.textContent = `Detalle técnico: ${error.message}`;
+                errorDetails.style.display = 'block';
+            }
         }
     }
 

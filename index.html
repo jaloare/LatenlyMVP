@@ -23,7 +23,7 @@
     <nav class="nav-bar">
         <a href="/" class="nav-logo">Latenly<span>.</span></a>
         <div class="nav-actions">
-            <a href="/login/" class="nav-cta">Iniciar Sesión →</a>
+            <a href="/login/" class="nav-cta" id="navLoginBtn">Iniciar Sesión →</a>
         </div>
     </nav>
 
@@ -269,6 +269,25 @@
         <p>© 2026 <a href="/">Latenly.com</a> — Inteligencia para clínicas dentales</p>
     </footer>
 
+    <!-- Auth Check Script for Nav -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let isLoggedIn = false;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+                    isLoggedIn = true;
+                    break;
+                }
+            }
+            if (isLoggedIn) {
+                const loginBtn = document.getElementById('navLoginBtn');
+                if (loginBtn) {
+                    loginBtn.href = '/reporte/';
+                    loginBtn.textContent = 'Ver mi Reporte →';
+                }
+            }
+        });
+    </script>
 </body>
-
 </html>
