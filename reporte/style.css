@@ -924,3 +924,41 @@
         padding: 2rem 1rem 3rem;
     }
 }
+
+/* ── Mobile Table Cards ────────────────────────────────────── */
+@media (max-width: 640px) {
+    .contacts-table thead {
+        display: none;
+    }
+    .contacts-table, .contacts-table tbody, .contacts-table tr, .contacts-table td {
+        display: block;
+        width: 100%;
+    }
+    .contacts-table tr {
+        margin-bottom: 1.5rem;
+        padding: 1.25rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+    }
+    .contacts-table td {
+        padding: 0.75rem 0;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .contacts-table td:last-child {
+        border-bottom: none;
+    }
+    .contacts-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.4rem;
+        color: var(--text-secondary);
+        opacity: 0.6;
+        letter-spacing: 0.5px;
+    }
+}

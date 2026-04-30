@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 card.id = `msg-${msgId}`;
                 card.innerHTML = `
                     <div class="msg-header">
-                        <span class="msg-badge">#${msgId} — ${m.tipo}</span>
+                        <span class="msg-badge">✨ IA #${msgId} — ${m.tipo}</span>
                         <span class="msg-for">Para: <strong>${m.para || ''}</strong></span>
                         <button class="btn-copy" data-msg="${m.texto.replace(/"/g, '&quot;')}">Copiar</button>
                     </div>
@@ -225,16 +225,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Build action cell — link to message if available
                 let accionHTML;
                 if (c.mensaje_id) {
-                    accionHTML = `<a href="#msg-${c.mensaje_id}" class="msg-link" title="${c.accion}">📩 Enviar Mensaje #${c.mensaje_id}</a>`;
+                    accionHTML = `
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <a href="#msg-${c.mensaje_id}" class="msg-link" title="${c.accion}">📩 Enviar Mensaje #${c.mensaje_id}</a>
+                            <span style="font-size: 0.65rem; color: var(--brand-violet); font-weight: 700; text-transform: uppercase;">✨ IA Personalizado</span>
+                        </div>
+                    `;
                 } else {
                     accionHTML = c.accion;
                 }
 
                 tr.innerHTML = `
-                    <td><strong>${c.nombre}</strong></td>
-                    <td>${c.tipo}</td>
-                    <td><span class="badge ${pClass}">${c.prioridad}</span></td>
-                    <td>${accionHTML}</td>
+                    <td data-label="Nombre"><strong>${c.nombre}</strong></td>
+                    <td data-label="Tipo">${c.tipo}</td>
+                    <td data-label="Prioridad"><span class="badge ${pClass}">${c.prioridad}</span></td>
+                    <td data-label="Acción">${accionHTML}</td>
                 `;
                 tbody.appendChild(tr);
             });
