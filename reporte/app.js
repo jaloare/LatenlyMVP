@@ -134,6 +134,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             const formatter = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 });
             document.getElementById('oppValor').innerText = `${formatter.format(data.resumen.valor_estimado_min)} – ${formatter.format(data.resumen.valor_estimado_max)} MXN`;
         }
+ 
+        // 3. Plan de Acción Personalizado
+        if (data.resumen) {
+            const hot = data.resumen.listos_agendar || 0;
+            const warm = data.resumen.potencial_conversaciones || 0;
+            const react = data.resumen.contactos_reactivables || 0;
+            
+            const planQuickWins = document.getElementById('planQuickWins');
+            if (planQuickWins) {
+                planQuickWins.innerHTML = `Contactar a los <strong>${hot} leads calientes</strong> que están listos para agendar.`;
+            }
+            const planRecent = document.getElementById('planRecent');
+            if (planRecent) {
+                planRecent.innerHTML = `Retomar las <strong>${warm} conversaciones</strong> con alto potencial de cierre.`;
+            }
+            const planReact = document.getElementById('planReact');
+            if (planReact) {
+                planReact.innerHTML = `Campaña masiva de reactivación a los <strong>${react} leads dormidos</strong>.`;
+            }
+        }
 
         // 2.5 Auditoría
         if (data.auditoria) {
