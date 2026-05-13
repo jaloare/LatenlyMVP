@@ -47,6 +47,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         Object.values(views).forEach(v => { if (v) v.classList.remove('active'); });
         if (views[name]) views[name].classList.add('active');
 
+        // Mostrar resumen del perfil en vistas de conexión y éxito
+        const summary = document.getElementById('profileSummary');
+        if (summary) {
+            summary.style.display = (name === 'connect' || name === 'success') ? 'block' : 'none';
+        }
+
         // Actualizar Header dinámicamente
         const text = headerTexts[name];
         if (text) {
@@ -120,11 +126,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const section = form.querySelector(`.form-section[data-section="${step}"]`);
             const inputs = [...section.querySelectorAll('input, textarea')];
             
-            // Validación nativa (radio, text, email)
             const nativeValid = inputs.every(i => i.reportValidity());
             if (!nativeValid) return false;
 
-            // Validación personalizada para Checkbox Groups con atributo 'required'
             const checkboxGrids = section.querySelectorAll('.checkbox-grid[required]');
             for (const grid of checkboxGrids) {
                 const checked = grid.querySelectorAll('input[type="checkbox"]:checked');
@@ -150,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         btnPrev.onclick = () => { if (currentStep > 1) { currentStep--; updateStepper(); } };
 
-        updateStepper(); // Asegura que el paso 1 se muestre al inicio
+        updateStepper(); 
 
         form.onsubmit = async (e) => {
             e.preventDefault();
@@ -161,7 +165,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const formData = new FormData(form);
             const profile = { user_id: user.id, raw_form_data: {} };
             
-            // Campos de tipo Array en DB
             const arrays = ['responders', 'whatsapp_usage', 'contact_naming_patterns', 'report_goals'];
             arrays.forEach(k => profile[k] = []);
 
@@ -182,7 +185,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return; 
             }
 
-            // 4) Guardado exitoso → Mostrar Nota y Sección QR
             renderFormSubmittedInfo(new Date().toISOString());
             initConnectView();
         };
@@ -190,9 +192,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ── 4 & 5) Sección de QR y Nota ───────────────────────────────────────────
     async function initConnectView() {
-        showView('connect');
-        // Inicializar sesión en backend (WAHA)
-        await edgeFetch('/sessions', { method: 'POST' });
+        showView('loading');
+        
+        try {
+            // 1) Comprobar si la sesión existe
+            let res = await edgeFetch('/sessions');
+            
+            if (res.status === 404) {
+                // 3) No existe -> Crear
+                await edgeFetch('/sessions', { method: 'POST' });
+            } else if (res.ok) {
+                const data = await res.json();
+                // 2) Si existe y es WORKING -> Éxito
+                if (data.status === 'WORKING') {
+                    showView('success');
+                    return;
+                }
+                // 4) Existe pero no WORKING -> Reiniciar
+                await edgeFetch('/sessions/restart', { method: 'POST' });
+            }
+
+            showView('connect');
+        } catch (e) {
+            console.error('[initConnectView]', e);
+            showView('error');
+            return;
+        }
         
         const btnGen = document.getElementById('btnGenerateQR');
         const qrBox = document.getElementById('qrContainer');
@@ -204,6 +229,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             qrBox.innerHTML = '<div class="spinner"></div>';
             
             try {
+                // 5) Solicitar QR
                 const res = await edgeFetch('/auth/qr');
                 const data = await res.json();
                 const qr = data.qr || data.data || data.base64;
@@ -212,7 +238,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     qrBox.innerHTML = `<img src="${qr.startsWith('data:') ? qr : `data:image/png;base64,${qr}`}" class="qr-image">`;
                     timerWrap.style.display = 'block';
                     
-                    // 5) Polling empieza SOLO cuando el QR se muestra
+                    // 6) El polling inicia cuando el QR se muestra
                     startPolling();
                     startCountdown(60, timerUI, () => {
                         btnGen.disabled = false;

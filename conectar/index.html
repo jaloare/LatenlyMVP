@@ -11,9 +11,23 @@
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-55PSCZS6');</script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55PSCZS6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- Background -->
     <div class="bg-ambient"></div>
@@ -47,6 +61,26 @@
         </header>
 
         <main class="glass-panel-static connect-card slide-up-anim">
+
+            <!-- Shared Profile Info (Shown in connect and success views) -->
+            <div id="profileSummary" style="display: none; margin-bottom: 2rem;">
+                <!-- Info: cuándo se envió el formulario -->
+                <div class="form-submitted-banner" style="margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <span class="form-submitted-icon">✓</span>
+                        <span>Perfil completado el <strong id="formSubmittedDate">—</strong></span>
+                    </div>
+                </div>
+
+                <!-- Nota de seguridad/privacidad -->
+                <div class="privacy-note">
+                    <p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary);">
+                        <span style="color: var(--brand-pink); font-weight: 600;">🔒 Privacidad Garantizada:</span><br>
+                        Nunca enviaremos mensajes automáticamente sin tu autorización. El reporte únicamente identifica
+                        oportunidades y propone mensajes personalizados para ayudarte a convertir más pacientes.
+                    </p>
+                </div>
+            </div>
 
             <!-- ── Vista: Cargando ───────────────────────────────────────── -->
             <div id="loadingView" class="view active">
@@ -247,25 +281,6 @@
             <!-- ── Vista: Conectar QR (Tab QR) ────────────────────────────── -->
             <div id="connectView" class="view">
                 <div id="tab-qr">
-                    <!-- Info: cuándo se envió el formulario -->
-                    <div class="form-submitted-banner">
-                        <div style="display: flex; align-items: center; gap: 0.6rem;">
-                            <span class="form-submitted-icon">✓</span>
-                            <span>Perfil completado el <strong id="formSubmittedDate">—</strong></span>
-                        </div>
-                    </div>
-
-                    <!-- Nota de seguridad/privacidad -->
-                    <div class="privacy-note slide-up-anim visible" style="margin-top: -1rem; margin-bottom: 2rem;">
-                        <p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary);">
-                            <span style="color: var(--brand-pink); font-weight: 600;">🔒 Privacidad
-                                Garantizada:</span><br>
-                            Nunca enviaremos mensajes automáticamente sin tu autorización. El reporte únicamente
-                            identifica oportunidades y propone mensajes personalizados para ayudarte a convertir más
-                            pacientes.
-                        </p>
-                    </div>
-
                     <!-- QR -->
                     <div class="code-display">
                         <div class="qr-placeholder" id="qrContainer">
