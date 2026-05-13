@@ -5,14 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Análisis de Oportunidades — Latenly</title>
-    <meta name="description" content="Tu reporte personalizado de oportunidades de venta en WhatsApp. Descubre pacientes listos para agendar.">
+    <meta name="description"
+        content="Tu reporte personalizado de oportunidades de venta en WhatsApp. Descubre pacientes listos para agendar.">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-55PSCZS6');</script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55PSCZS6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- Background Elements -->
     <div class="bg-ambient"></div>
@@ -22,11 +37,18 @@
     <nav class="nav-bar">
         <a href="/" class="nav-logo">Latenly<span>.</span></a>
         <div class="nav-actions">
-            <a id="vipSupportBtn" href="https://wa.me/5219614639921?text=Hola,%20necesito%20soporte%20VIP%20con%20Latenly%20%F0%9F%9B%A1%EF%B8%8F" target="_blank" class="nav-link" style="color: var(--brand-pink); display: flex; align-items: center; gap: 0.3rem;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <a id="vipSupportBtn"
+                href="https://wa.me/5219614639921?text=Hola,%20necesito%20soporte%20VIP%20con%20Latenly%20%F0%9F%9B%A1%EF%B8%8F"
+                target="_blank" class="nav-link"
+                style="color: var(--brand-pink); display: flex; align-items: center; gap: 0.3rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
                 Soporte VIP
             </a>
-            <a href="/#comprar" class="btn-glow-green" id="buyTestBtn" style="display:none; padding: 0.4rem 1rem; font-size: 0.9rem;">Quiero mi reporte</a>
+            <a href="/#comprar" class="btn-glow-green" id="buyTestBtn"
+                style="display:none; padding: 0.4rem 1rem; font-size: 0.9rem;">Quiero mi reporte</a>
             <a href="/conectar/" class="nav-link">Conectar</a>
             <button class="btn-ghost" id="logoutBtn" style="display:none;">Cerrar Sesión</button>
         </div>
@@ -38,7 +60,8 @@
         <div id="loadingView" class="view-state active">
             <div class="spinner"></div>
             <h2 class="gradient-text" style="text-align:center; margin-top:1.5rem;">Analizando conversaciones...</h2>
-            <p class="text-secondary" style="text-align:center; margin-top:0.5rem;">Buscando el dinero que se te está escapando</p>
+            <p class="text-secondary" style="text-align:center; margin-top:0.5rem;">Buscando el dinero que se te está
+                escapando</p>
         </div>
 
         <!-- Error/Empty State -->
@@ -46,14 +69,17 @@
             <div class="glass-panel" style="text-align:center; padding:4rem 2rem; max-width: 600px; margin: 4rem auto;">
                 <h2 style="color: var(--text-primary); margin-bottom:1rem;">Tu análisis está en proceso ⚙️</h2>
                 <p class="text-secondary" style="margin-bottom: 2rem; line-height: 1.6;">
-                    Toma entre 48 y 72 horas después de conectar tu WhatsApp. Nuestra IA está analizando tus conversaciones para encontrar y clasificar las oportunidades de venta.
+                    Toma entre 48 y 72 horas después de conectar tu WhatsApp. Nuestra IA está analizando tus
+                    conversaciones para encontrar y clasificar las oportunidades de venta.
                 </p>
-                <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+                <div
+                    style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
                     <p style="margin: 0; font-size: 0.95rem; color: var(--text-primary);">
                         <strong>¿Aún no has conectado tu WhatsApp?</strong><br>
                         Debes hacerlo para que podamos comenzar el análisis.
                     </p>
-                    <a href="/conectar/" class="btn-glow-green" style="margin-top: 1.5rem; display: inline-block;">Conectar mi WhatsApp ahora</a>
+                    <a href="/conectar/" class="btn-glow-green"
+                        style="margin-top: 1.5rem; display: inline-block;">Conectar mi WhatsApp ahora</a>
                 </div>
                 <p id="errorDetails" style="color: var(--color-danger); font-size: 0.85rem; display: none;"></p>
             </div>
@@ -86,7 +112,8 @@
                         <span class="audit-icon">🛡️</span>
                         <div>
                             <h4>Limpieza y Filtrado de Ruido</h4>
-                            <p>Analizamos <strong id="auditTotal">0</strong> conversaciones. Eliminamos el ruido para que te enfoques en el dinero:</p>
+                            <p>Analizamos <strong id="auditTotal">0</strong> conversaciones. Eliminamos el ruido para
+                                que te enfoques en el dinero:</p>
                         </div>
                     </div>
                     <div class="audit-grid">
@@ -332,12 +359,15 @@
                 </div>
             </section>
 
-                <!-- Resumen de Valor Impactante -->
-                <div class="bridge-box glass-panel-static" style="margin-bottom: 2rem; border-left: 3px solid var(--color-success);">
-                    <p style="margin: 0; font-size: 0.95rem; line-height: 1.6;">
-                        Acabas de ver exactamente <strong>cuánto dinero</strong> tiene tu WhatsApp <strong>esperando respuesta</strong>. Esto no es una estimación — son <strong>conversaciones reales</strong> de personas que ya te buscaron.
-                    </p>
-                </div>
+            <!-- Resumen de Valor Impactante -->
+            <div class="bridge-box glass-panel-static"
+                style="margin-bottom: 2rem; border-left: 3px solid var(--color-success);">
+                <p style="margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                    Acabas de ver exactamente <strong>cuánto dinero</strong> tiene tu WhatsApp <strong>esperando
+                        respuesta</strong>. Esto no es una estimación — son <strong>conversaciones reales</strong> de
+                    personas que ya te buscaron.
+                </p>
+            </div>
 
             <!-- 9. SIGUIENTE PASO — REPORTE vs SISTEMA -->
             <section class="section-block slide-up-anim">
@@ -364,71 +394,85 @@
                                 quién se está enfriando
                                 y te diga <strong>exactamente qué escribirle a cada persona</strong>.
                                 <br><br>
-                                <span style="color: var(--brand-pink); font-size: 0.85rem; font-weight: 600;">⚠️ Dato clave: Un lead que no recibe respuesta rápida tiene un 80% menos de probabilidad de agendar.</span>
+                                <span style="color: var(--brand-pink); font-size: 0.85rem; font-weight: 600;">⚠️ Dato
+                                    clave: Un lead que no recibe respuesta rápida tiene un 80% menos de probabilidad de
+                                    agendar.</span>
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 10. NEXT STEPS (Replaced Pre-sale) -->
-            <section class="section-next-steps slide-up-anim" style="margin-top: 4rem; margin-bottom: 2rem;">
-                <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: var(--text-primary);">
-                    Tus Siguientes Pasos
-                </h3>
-                
-                <div style="display: grid; gap: 1.5rem; grid-template-columns: 1fr; max-width: 750px; margin: 0 auto;">
-                    
-                    <!-- Bloque 1: Kit de Conversión -->
-                    <div class="glass-panel glow-border" style="padding: 2rem; text-align: left;">
-                        <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
-                            🛠️ Siguiente paso: actúa hoy
-                        </h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
-                            Ya sabes dónde está el dinero. Ahora necesitas saber qué escribirle a cada lead — sin sonar desesperado, sin improvisar.<br><br>
-                            El <strong>Kit de Conversión</strong> incluye los mensajes, secuencias y estrategias exactas para cerrar, reactivar y hacer upsell a tus pacientes. Hoy, sin esperar el sistema.
-                        </p>
-                        <a href="https://pay.hotmart.com/PLACEHOLDER" target="_blank" class="btn-glow-green" style="display: inline-block;">
-                            → Quiero el Kit de Conversión — $497 MXN
-                        </a>
+                <section class="section-next-steps slide-up-anim" style="margin-top: 4rem; margin-bottom: 2rem;">
+                    <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: var(--text-primary);">
+                        Tus Siguientes Pasos
+                    </h3>
+
+                    <div
+                        style="display: grid; gap: 1.5rem; grid-template-columns: 1fr; max-width: 750px; margin: 0 auto;">
+
+                        <!-- Bloque 1: Kit de Conversión -->
+                        <div class="glass-panel glow-border" style="padding: 2rem; text-align: left;">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+                                🛠️ Siguiente paso: actúa hoy
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                                Ya sabes dónde está el dinero. Ahora necesitas saber qué escribirle a cada lead — sin
+                                sonar desesperado, sin improvisar.<br><br>
+                                El <strong>Kit de Conversión</strong> incluye los mensajes, secuencias y estrategias
+                                exactas para cerrar, reactivar y hacer upsell a tus pacientes. Hoy, sin esperar el
+                                sistema.
+                            </p>
+                            <a href="https://pay.hotmart.com/PLACEHOLDER" target="_blank" class="btn-glow-green"
+                                style="display: inline-block;">
+                                → Quiero el Kit de Conversión — $497 MXN
+                            </a>
+                        </div>
+
+                        <!-- Bloque 2: Preventa -->
+                        <div class="glass-panel" style="padding: 2rem; text-align: left;">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+                                🚀 ¿Prefieres que esto sea automático?
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                                El sistema que hace esto solo — monitoreo continuo, detección de leads, mensajes
+                                personalizados cada 1-2 días — está en construcción. Solo 20 lugares con precio
+                                Fundador, congelado de por vida.
+                            </p>
+                            <a href="https://wa.me/5219614639921?text=Hola%2C%20quiero%20un%20lugar%20en%20la%20preventa%20del%20sistema%20Latenly%20%F0%9F%9A%80"
+                                target="_blank" class="btn-outline" style="display: inline-block;">
+                                → Quiero un lugar en la preventa
+                            </a>
+                        </div>
+
+                        <!-- Bloque 3: Compartir -->
+                        <div class="glass-panel" style="padding: 2rem; text-align: left;">
+                            <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
+                                📤 ¿Conoces a otro doctor perdiendo pacientes así?
+                            </h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                                Comparte este reporte. Si entra en preventa, ambos reciben un mes gratis al activar.
+                            </p>
+                            <button onclick="shareReport()" class="btn-ghost"
+                                style="display: inline-block; border: 1px solid var(--border-subtle); padding: 0.6rem 1.2rem; border-radius: var(--radius-md);">
+                                → Compartir con un colega
+                            </button>
+                        </div>
+
                     </div>
+                </section>
 
-                    <!-- Bloque 2: Preventa -->
-                    <div class="glass-panel" style="padding: 2rem; text-align: left;">
-                        <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
-                            🚀 ¿Prefieres que esto sea automático?
-                        </h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
-                            El sistema que hace esto solo — monitoreo continuo, detección de leads, mensajes personalizados cada 1-2 días — está en construcción. Solo 20 lugares con precio Fundador, congelado de por vida.
+                <!-- PRIVACY SECTION -->
+                <section class="section-block slide-up-anim" style="margin-top: 4rem; opacity: 0.7;">
+                    <div class="glass-panel-static"
+                        style="text-align: center; padding: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); border: 1px dashed var(--border-subtle);">
+                        <p style="margin: 0;">
+                            🔒 <strong>Privacidad y Seguridad Garantizada:</strong> Tus conversaciones están cifradas de
+                            extremo a extremo. Latenly procesa la información únicamente para clasificarla y luego la
+                            elimina de sus servidores temporales. No compartimos datos con terceros.
                         </p>
-                        <a href="https://wa.me/5219614639921?text=Hola%2C%20quiero%20un%20lugar%20en%20la%20preventa%20del%20sistema%20Latenly%20%F0%9F%9A%80" target="_blank" class="btn-outline" style="display: inline-block;">
-                            → Quiero un lugar en la preventa
-                        </a>
                     </div>
-
-                    <!-- Bloque 3: Compartir -->
-                    <div class="glass-panel" style="padding: 2rem; text-align: left;">
-                        <h4 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-primary);">
-                            📤 ¿Conoces a otro doctor perdiendo pacientes así?
-                        </h4>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
-                            Comparte este reporte. Si entra en preventa, ambos reciben un mes gratis al activar.
-                        </p>
-                        <button onclick="shareReport()" class="btn-ghost" style="display: inline-block; border: 1px solid var(--border-subtle); padding: 0.6rem 1.2rem; border-radius: var(--radius-md);">
-                            → Compartir con un colega
-                        </button>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- PRIVACY SECTION -->
-            <section class="section-block slide-up-anim" style="margin-top: 4rem; opacity: 0.7;">
-                <div class="glass-panel-static" style="text-align: center; padding: 1.5rem; font-size: 0.85rem; color: var(--text-secondary); border: 1px dashed var(--border-subtle);">
-                    <p style="margin: 0;">
-                        🔒 <strong>Privacidad y Seguridad Garantizada:</strong> Tus conversaciones están cifradas de extremo a extremo. Latenly procesa la información únicamente para clasificarla y luego la elimina de sus servidores temporales. No compartimos datos con terceros.
-                    </p>
-                </div>
-            </section>
+                </section>
 
         </div>
     </div>
