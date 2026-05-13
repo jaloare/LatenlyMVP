@@ -1,5 +1,5 @@
 const LatenlyConfig = {
-    API_BASE: "https://api.latenly.com",
+    API_BASE: "https://ifrwbnvdflbrswwvloae.supabase.co/functions/v1/cf-upstream-proxy",
     POLL_INTERVAL_MS: 3000,
     POLL_MAX_ATTEMPTS: 60,
 

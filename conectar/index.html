@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conectar WhatsApp — Latenly</title>
-    <meta name="description" content="Vincula tu cuenta de WhatsApp con Latenly para comenzar el análisis de oportunidades.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
+    <meta name="description"
+        content="Vincula tu cuenta de WhatsApp con Latenly para comenzar el análisis de oportunidades.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,8 +23,14 @@
     <nav class="nav-bar">
         <a href="/" class="nav-logo">Latenly<span>.</span></a>
         <div class="nav-actions">
-            <a id="vipSupportBtn" href="https://wa.me/5219614639921?text=Hola,%20necesito%20soporte%20VIP%20con%20Latenly%20%F0%9F%9B%A1%EF%B8%8F" target="_blank" class="nav-link" style="color: var(--brand-pink); display: flex; align-items: center; gap: 0.3rem;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <a id="vipSupportBtn"
+                href="https://wa.me/5219614639921?text=Hola,%20necesito%20soporte%20VIP%20con%20Latenly%20%F0%9F%9B%A1%EF%B8%8F"
+                target="_blank" class="nav-link"
+                style="color: var(--brand-pink); display: flex; align-items: center; gap: 0.3rem;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
                 Soporte VIP
             </a>
             <a href="/reporte/" class="nav-link">Mi Reporte</a>
@@ -33,14 +41,14 @@
     <div class="container-sm connect-wrapper">
 
         <header class="connect-header slide-up-anim">
-            <div class="badge-violet badge" style="margin-bottom: 1rem;">PASO 2 DE 3</div>
-            <h1>Conectar <span class="gradient-text">WhatsApp</span></h1>
-            <p>Vincula tu cuenta para iniciar el análisis automático de tus conversaciones.</p>
+            <div id="stepBadge" class="badge-violet badge" style="margin-bottom: 1rem;">PASO 1 DE 2</div>
+            <h1 id="pageTitle">Conectar <span class="gradient-text">WhatsApp</span></h1>
+            <p id="pageDesc">Vincula tu cuenta para iniciar el análisis automático de tus conversaciones.</p>
         </header>
 
         <main class="glass-panel-static connect-card slide-up-anim">
 
-            <!-- Loading View -->
+            <!-- ── Vista: Cargando ───────────────────────────────────────── -->
             <div id="loadingView" class="view active">
                 <div class="view-center">
                     <div class="spinner"></div>
@@ -48,7 +56,7 @@
                 </div>
             </div>
 
-            <!-- Error/Not Found View -->
+            <!-- ── Vista: Error ─────────────────────────────────────────── -->
             <div id="errorView" class="view">
                 <div class="view-center">
                     <div class="status-icon status-error">✕</div>
@@ -58,38 +66,223 @@
                 </div>
             </div>
 
-            <!-- Success Connected View -->
-            <div id="successView" class="view">
-                <div class="view-center">
-                    <div class="status-icon status-success">✓</div>
-                    <h2>¡Tu WhatsApp está conectado!</h2>
-                    <p>Estamos analizando tus conversaciones para encontrar tus próximas citas. Recibirás un mensaje de WhatsApp con tu reporte en las próximas 48–72 horas.</p>
-                    <a href="/reporte/" class="btn-glow" style="margin-top: 1.5rem;">Ver Mi Reporte →</a>
-                </div>
+            <!-- ── Vista: Formulario de Perfil (4 secciones) ─────────────────── -->
+            <div id="formView" class="view">
+                <form id="profileForm" class="profile-form">
+                    <div class="form-sections">
+                        <!-- Sección 1: Información básica -->
+                        <div class="form-section active" data-section="1">
+                            <h2 class="section-title"><span>1</span> Información básica</h2>
+
+                            <div class="form-group">
+                                <label>¿Este número es WhatsApp Business?</label>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="whatsapp_business" value="Sí"
+                                            required> Sí</label>
+                                    <label class="radio-label"><input type="radio" name="whatsapp_business" value="No">
+                                        No</label>
+                                    <label class="radio-label"><input type="radio" name="whatsapp_business"
+                                            value="No estoy seguro/a"> No estoy seguro/a</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>¿Atiendes pacientes en diferentes clínicas o sucursales?</label>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="clinic_usage_count"
+                                            value="No, solo en una" required> No, solo en una</label>
+                                    <label class="radio-label"><input type="radio" name="clinic_usage_count"
+                                            value="Sí, en 2"> Sí, en 2</label>
+                                    <label class="radio-label"><input type="radio" name="clinic_usage_count"
+                                            value="Sí, en 3 o más"> Sí, en 3 o más</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>¿Quién responde normalmente este WhatsApp? <small>(Puedes seleccionar varias
+                                        opciones)</small></label>
+                                <div class="checkbox-grid" required>
+                                    <label class="checkbox-label"><input type="checkbox" name="responders"
+                                            value="Yo personalmente"> Yo personalmente</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="responders"
+                                            value="Recepcionista"> Recepcionista</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="responders"
+                                            value="Asistente"> Asistente</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="responders"
+                                            value="Varias personas"> Varias personas</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="responders" value="Otro">
+                                        Otro</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 2: Uso del número -->
+                        <div class="form-section" data-section="2">
+                            <h2 class="section-title"><span>2</span> Uso del número</h2>
+
+                            <div class="form-group">
+                                <label>¿Para qué utilizas principalmente este WhatsApp? <small>(Puedes seleccionar
+                                        varias opciones)</small></label>
+                                <div class="checkbox-grid" required>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Pacientes nuevos"> Pacientes nuevos</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Seguimiento de pacientes"> Seguimiento de pacientes</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Confirmación de citas"> Confirmación de citas</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Atención general"> Atención general</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Amigos/familia"> Amigos/familia</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Proveedores"> Proveedores</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Marketing/publicidad"> Marketing, publicidad</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="whatsapp_usage"
+                                            value="Otro"> Otro</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>¿Qué tan rápido sueles responder mensajes?</label>
+                                <div class="radio-group">
+                                    <label class="radio-label"><input type="radio" name="response_speed"
+                                            value="Casi siempre rápido" required> Casi siempre rápido</label>
+                                    <label class="radio-label"><input type="radio" name="response_speed"
+                                            value="Depende del día"> Depende del día</label>
+                                    <label class="radio-label"><input type="radio" name="response_speed"
+                                            value="Frecuentemente tardo en responder"> Frecuentemente tardo</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección 3: Organización de contactos -->
+                        <div class="form-section" data-section="3">
+                            <h2 class="section-title"><span>3</span> Organización de contactos</h2>
+
+                            <div class="form-group">
+                                <label>¿Cómo sueles guardar a los pacientes o personas que pidieron información?
+                                    <small>(Puedes seleccionar varias opciones)</small></label>
+                                <div class="checkbox-grid" required>
+                                    <label class="checkbox-label"><input type="checkbox" name="contact_naming_patterns"
+                                            value="Nombre solamente"> Solo nombre</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="contact_naming_patterns"
+                                            value="Nombre + tratamiento"> Nombre + Tratamiento</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="contact_naming_patterns"
+                                            value="Nombre + Paciente"> Nombre + "Paciente"</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="contact_naming_patterns"
+                                            value="Nombre + clínica"> Nombre + Clínica</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="contact_naming_patterns"
+                                            value="Uso emojis o símbolos"> Emojis/Símbolos</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="contact_naming_patterns"
+                                            value="No tengo una forma específica"> Sin forma</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact_examples">¿Puedes compartir algunos ejemplos de cómo guardas
+                                    contactos?</label>
+                                <textarea id="contact_examples" name="contact_examples" rows="2"
+                                    placeholder="Ej. Juan Brackets, Paciente Invisalign, Mamá de Sofía, Carlos Nuevo..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="personal_contact_patterns">¿Cómo distingues normalmente contactos personales
+                                    (amigos/familia)?</label>
+                                <textarea id="personal_contact_patterns" name="personal_contact_patterns" rows="2"
+                                    placeholder="Ej. Emojis, apodos, prefijos, 'personal'..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="family_contact_patterns">¿Cómo identificas normalmente a familiares de
+                                    pacientes?</label>
+                                <textarea id="family_contact_patterns" name="family_contact_patterns" rows="2"
+                                    placeholder="Ej. Mamá de..., Papá de..., Tutor..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Sección 4: Objetivos del reporte -->
+                        <div class="form-section" data-section="4">
+                            <h2 class="section-title"><span>4</span> Objetivos del reporte</h2>
+
+                            <div class="form-group">
+                                <label>¿Qué te gustaría obtener de este reporte? <small>(Puedes seleccionar varias
+                                        opciones)</small></label>
+                                <div class="checkbox-grid" required>
+                                    <label class="checkbox-label"><input type="checkbox" name="report_goals"
+                                            value="Más citas agendadas"> Más citas agendadas</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="report_goals"
+                                            value="Reactivar pacientes"> Reactivar pacientes que dejaron de
+                                        responder</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="report_goals"
+                                            value="Saber potencial"> Identificar pacientes potenciales</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="report_goals"
+                                            value="Mejor seguimiento"> Mejor seguimiento</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="report_goals"
+                                            value="Mensajes listos"> Mensajes listos para enviar</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="report_goals"
+                                            value="Otro"> Otro</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="additional_notes">¿Hay algo importante que debamos saber sobre cómo usas
+                                    este WhatsApp?</label>
+                                <textarea id="additional_notes" name="additional_notes" rows="3"
+                                    placeholder="Comentarios adicionales..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-nav">
+                        <button type="button" id="btnPrev" class="btn-ghost"
+                            style="visibility: hidden;">Anterior</button>
+                        <button type="button" id="btnNext" class="btn-glow">Siguiente</button>
+                        <button type="submit" id="btnSubmit" class="btn-glow" style="display: none;">Continuar y
+                            conectar WhatsApp</button>
+                    </div>
+                </form>
             </div>
 
-            <!-- Disconnected / Selector View -->
-            <div id="disconnectedView" class="view">
+            <!-- ── Vista: Conectar QR (Tab QR) ────────────────────────────── -->
+            <div id="connectView" class="view">
+                <div id="tab-qr">
+                    <!-- Info: cuándo se envió el formulario -->
+                    <div class="form-submitted-banner">
+                        <div style="display: flex; align-items: center; gap: 0.6rem;">
+                            <span class="form-submitted-icon">✓</span>
+                            <span>Perfil completado el <strong id="formSubmittedDate">—</strong></span>
+                        </div>
+                    </div>
 
-                <div class="method-tabs">
-                    <button class="tab-btn active" data-tab="qr">Código QR</button>
-                    <button class="tab-btn" data-tab="code">Código de Texto</button>
-                </div>
+                    <!-- Nota de seguridad/privacidad -->
+                    <div class="privacy-note slide-up-anim visible" style="margin-top: -1rem; margin-bottom: 2rem;">
+                        <p style="font-size: 0.8rem; line-height: 1.5; color: var(--text-secondary);">
+                            <span style="color: var(--brand-pink); font-weight: 600;">🔒 Privacidad
+                                Garantizada:</span><br>
+                            Nunca enviaremos mensajes automáticamente sin tu autorización. El reporte únicamente
+                            identifica oportunidades y propone mensajes personalizados para ayudarte a convertir más
+                            pacientes.
+                        </p>
+                    </div>
 
-                <!-- Tab: QR -->
-                <div id="tab-qr" class="tab-content active">
+                    <!-- QR -->
                     <div class="code-display">
                         <div class="qr-placeholder" id="qrContainer">
                             <button class="btn-glow" id="btnGenerateQR">Generar QR</button>
                         </div>
-                        <p class="timer-text" style="display:none;" id="timerWrapperQR">Expira en <span id="timerQR">1:00</span></p>
+                        <p class="timer-text" style="display:none;" id="timerWrapperQR">
+                            Expira en <span id="timerQR">1:00</span>
+                        </p>
                     </div>
 
+                    <!-- Instrucciones -->
                     <div class="instructions-box">
                         <ul class="step-list">
                             <li>Abre WhatsApp en tu teléfono.</li>
                             <li>Toca <strong>Menú</strong> en Android o <strong>Configuración</strong> en iPhone.</li>
-                            <li>Toca <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un dispositivo</strong>.</li>
+                            <li>Toca <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un
+                                    dispositivo</strong>.</li>
                             <li>Apunta tu teléfono a esta pantalla para capturar el código QR.</li>
                         </ul>
                     </div>
@@ -105,7 +298,8 @@
                                 <li>Toca <strong>Menú</strong> en Android o <strong>Configuración</strong> en iPhone.
                                     <div class="step-img-placeholder">[Imagen Menú/Configuración]</div>
                                 </li>
-                                <li>Toca <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un dispositivo</strong>.
+                                <li>Toca <strong>Dispositivos vinculados</strong> y luego <strong>Vincular un
+                                        dispositivo</strong>.
                                     <div class="step-img-placeholder">[Imagen Dispositivos Vinculados]</div>
                                 </li>
                                 <li>Apunta tu teléfono a esta pantalla para capturar el código QR.</li>
@@ -113,58 +307,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Tab: Code -->
-                <div id="tab-code" class="tab-content">
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label class="input-label" for="phoneInput">Número de WhatsApp</label>
-                        <div class="phone-input-wrapper">
-                            <div class="phone-prefix">
-                                <span>🇲🇽</span> <span>+52</span>
-                            </div>
-                            <input type="tel" id="phoneInput" class="input-field phone-field" placeholder="10 dígitos" maxlength="10">
-                        </div>
-                        <p class="input-error" id="phoneError">Por favor, ingresa un número válido de 10 dígitos.</p>
-                    </div>
-
-                    <div class="code-display">
-                        <div class="text-code-box" id="textCodeContainer" style="display:none;">
-                            <span class="text-secondary">Cargando...</span>
-                        </div>
-                        <div style="display: flex; gap: 1rem; justify-content: center; flex-direction: column;">
-                            <button class="btn-glow" id="btnGenerateCode">Generar Código</button>
-                            <button class="btn-outline" id="btnCopyCode" style="display: none;">Copiar Código</button>
-                        </div>
-                        <p class="timer-text" style="display:none;" id="timerWrapperCode">Expira en <span id="timerCode">3:00</span></p>
-                    </div>
-
-                    <div class="instructions-box">
-                        <ul class="step-list">
-                            <li>Abre WhatsApp en tu teléfono.</li>
-                            <li>Ve a <strong>Dispositivos vinculados</strong> > <strong>Vincular un dispositivo</strong>.</li>
-                            <li>Toca <strong>Vincular con el número de teléfono</strong> en la parte inferior de la pantalla.</li>
-                            <li>Introduce el código de 8 letras y números que aparece arriba.</li>
-                        </ul>
-                    </div>
-
-                    <div class="accordion">
-                        <button class="accordion-header">
-                            <span>Tutorial paso a paso con fotos</span>
-                            <span class="accordion-icon">▼</span>
-                        </button>
-                        <div class="accordion-content">
-                            <ul class="step-list">
-                                <li>Abre WhatsApp en tu teléfono.</li>
-                                <li>Ve a <strong>Dispositivos vinculados</strong> > <strong>Vincular un dispositivo</strong>.</li>
-                                <li>Toca <strong>Vincular con el número de teléfono</strong> en la parte inferior de la pantalla.
-                                    <div class="step-img-placeholder">[Imagen Vincular con teléfono]</div>
-                                </li>
-                                <li>Introduce el código de 8 letras y números que aparece arriba.</li>
-                            </ul>
-                        </div>
-                    </div>
+            <!-- ── Vista: Conectado exitosamente ───────────────────────── -->
+            <div id="successView" class="view">
+                <div class="view-center">
+                    <div class="status-icon status-success">✓</div>
+                    <h2>¡Tu WhatsApp está conectado!</h2>
+                    <p>Estamos analizando tus conversaciones para encontrar tus próximas citas. Recibirás un mensaje de
+                        WhatsApp con tu reporte en las próximas 48–72 horas.</p>
+                    <a href="/reporte/" class="btn-glow" style="margin-top: 1.5rem;">Ver Mi Reporte →</a>
                 </div>
-
             </div>
 
         </main>
@@ -180,4 +333,5 @@
     <script src="app.js"></script>
 
 </body>
+
 </html>

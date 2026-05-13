@@ -75,33 +75,6 @@ const LatenlyAuth = (() => {
     }
 
     /**
-     * Sign up with email and password.
-     * @param {string} email
-     * @param {string} password
-     * @returns {{ user: object|null, error: string|null }}
-     */
-    async function signUp(email, password) {
-        init();
-        if (!supabase) return { user: null, error: 'Supabase not initialized' };
-
-        const { data, error } = await supabase.auth.signUp({
-            email,
-            password
-        });
-
-        if (error) {
-            return { user: null, error: _translateError(error.message) };
-        }
-
-        // Check if email confirmation is required
-        if (data.user && !data.session) {
-            return { user: data.user, error: null, needsConfirmation: true };
-        }
-
-        return { user: data.user, error: null, needsConfirmation: false };
-    }
-
-    /**
      * Sign out the current user.
      */
     async function signOut() {
@@ -152,8 +125,7 @@ const LatenlyAuth = (() => {
             'User already registered': 'Este email ya tiene una cuenta.',
             'Password should be at least 6 characters': 'La contraseña debe tener al menos 6 caracteres.',
             'Unable to validate email address: invalid format': 'Formato de email inválido.',
-            'Email rate limit exceeded': 'Demasiados intentos. Espera unos minutos.',
-            'Signup requires a valid password': 'Ingresa una contraseña válida.',
+            'Email rate limit exceeded': 'Demasiados intentos. Espera unos minutos.'
         };
         return map[msg] || msg;
     }
@@ -164,7 +136,6 @@ const LatenlyAuth = (() => {
         getSession,
         getUser,
         signIn,
-        signUp,
         signOut,
         requireAuth,
         redirectIfAuthenticated,
